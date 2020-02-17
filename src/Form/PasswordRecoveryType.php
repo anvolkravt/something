@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Form;
 
@@ -10,27 +10,24 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class PasswordRecoveryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'username',
+            ->add('username',
                 TextType::class,
                 [
                     'required' => true,
                     'label' => 'Username',
                 ])
-            ->add(
-                'plainPassword',
+            ->add('plainPassword',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
-                    'first_options'  => ['label' => 'Password'],
-                    'second_options' => ['label' => 'Repeat Password'],
+                    'first_options'  => ['label' => 'New Password'],
+                    'second_options' => ['label' => 'Repeat New Password'],
                     'required' => true,
                     'mapped' => false,
                     'constraints' => [

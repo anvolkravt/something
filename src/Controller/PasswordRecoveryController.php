@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\PasswordRecoveryType;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,38 +13,40 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class RegistrationController extends AbstractController
+class PasswordRecoveryController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/password_recovery", name="app_password_recovery")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(PasswordRecoveryType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager
+            ->getRepository(User::class)
+            ->find('username');
+
+        if ($form->isSubmitted() && $form->isValid() && $user) {
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setRoles(['ROLE_USER']);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+//            $entityManager->persist($user);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('password_recovery/index.html.twig', [
+            'passwordRecoveryForm' => $form->createView(),
         ]);
     }
 }

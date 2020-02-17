@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Password Recovery{% endblock %}
+
+{% block body %}
+    <h1>Password Recovery</h1>
+
+    {{ form_start(passwordRecoveryForm) }}
+    {{ form_row(passwordRecoveryForm.username) }}
+    {{ form_row(passwordRecoveryForm.plainPassword.first) }}
+    {{ form_row(passwordRecoveryForm.plainPassword.second) }}
+
+    <button class="btn">Recover Password</button>
+    {{ form_end(passwordRecoveryForm) }}
+{% endblock %}
