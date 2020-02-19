@@ -23,6 +23,7 @@ class RegistrationFormType extends AbstractType
                 [
                     'required' => true,
                     'label' => 'Username',
+                    'attr' => ['autofocus' => true]
                 ])
             ->add(
                 'plainPassword',
