@@ -39,7 +39,7 @@ class Quiz
     private $questions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="quiz")
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz")
      */
     private $results;
 

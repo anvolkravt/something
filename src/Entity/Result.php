@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,7 +21,7 @@ class Result
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="results", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="results", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $username;
@@ -40,7 +42,7 @@ class Result
     private $finish;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Quiz", mappedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Quiz", inversedBy="results")
      */
     private $quiz;
 
