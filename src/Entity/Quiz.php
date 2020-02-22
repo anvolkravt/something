@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -35,6 +37,11 @@ class Quiz
      * @ORM\ManyToMany(targetEntity="App\Entity\Question", inversedBy="quizzes")
      */
     private $questions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="quiz")
+     */
+    private $results;
 
     public function getId(): ?int
     {
@@ -85,6 +92,18 @@ class Quiz
     public function setQuestions(?Question $questions): self
     {
         $this->questions = $questions;
+
+        return $this;
+    }
+
+    public function getResults(): ?Result
+    {
+        return $this->results;
+    }
+
+    public function setResults(?Result $results): self
+    {
+        $this->results = $results;
 
         return $this;
     }

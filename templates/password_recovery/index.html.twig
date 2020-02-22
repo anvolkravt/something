@@ -7,9 +7,10 @@
         <div class="form-container">
             <h1 class="form-header">Password Recovery</h1>
 
-            {{ form_start(passwordRecoveryForm, {'action': path('app_password_recovery'), 'method': 'POST',
+            {{ form_start(passwordRecoveryForm, { 'method': 'POST',
                 'attr':{'class': 'form'}}) }}
-            {{ form_row(passwordRecoveryForm.username) }}
+
+            <h1>hi, {{ username }} </h1>
             {{ form_row(passwordRecoveryForm.plainPassword.first) }}
             {{ form_row(passwordRecoveryForm.plainPassword.second) }}
 

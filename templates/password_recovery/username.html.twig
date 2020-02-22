@@ -1,0 +1,17 @@
+{% extends 'base_form.html.twig' %}
+
+{% block title %}Password Recovery{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="form-container">
+            <h1 class="form-header">Password Recovery</h1>
+
+            {{ form_start(passwordRecoveryUsernameForm, {'action': path('app_password_recovery_username'), 'method': 'POST',
+                'attr':{'class': 'form'}}) }}
+                        {{ form_row(passwordRecoveryUsernameForm.username) }}
+            <button class="btn">Check</button>
+            {{ form_end(passwordRecoveryUsernameForm) }}
+        </div>
+    </div>
+{% endblock %}

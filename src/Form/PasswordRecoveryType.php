@@ -16,12 +16,12 @@ class PasswordRecoveryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',
-                TextType::class,
-                [
-                    'required' => true,
-                    'label' => 'Username',
-                ])
+//            ->add('username',
+//                TextType::class,
+//                [
+//                    'required' => true,
+//                    'label' => 'Username',
+//                ])
             ->add('plainPassword',
                 RepeatedType::class,
                 [

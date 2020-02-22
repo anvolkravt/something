@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Question{% endblock %}
+
+{% block body %}
+    {{ form_start(addQuestionForm, {'action': path('add_question'), 'method': 'POST',
+        'attr':{'class': 'form'}}) }}
+    {{ form_row(addQuestionForm.text) }}
+{#    {% for i in 1..4 %}#}
+{#        {% for answer in addQuestionForm.answers %}#}
+            <li>{{ form_row(answers.isCorrect) }}{{ form_row(answer.text) }}</li>
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+
+    <button class="btn" type="submit">Add Question</button>
+    {{ form_end(addQuestionForm) }}
+
+{#    {{ form(addQuestionForm) }}#}
+
+{% endblock %}
