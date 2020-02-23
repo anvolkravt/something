@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/adminSection.css') }}">
+{% endblock %}
+
 {% block title %}Questions{% endblock %}
 
 {% block body %}
-    {%  for question in questions %}
-        {{ question.text }}
-{#        {% for i in question.answers|length %}#}
-{#            {{ question.answers[i] }}#}
-{#        {% endfor %}#}
-    {% endfor %}
+    <h1 class="page-title">Question List</h1>
+    <ul class="question-list">
+        {%  for question in questions %}
+            <li class="question-item">
+                {{ question.text }}
+            </li>
+        {% endfor %}
+    </ul>
 
 {#    {{ question.text }}#}
 {#    {% for answer in answers %}#}

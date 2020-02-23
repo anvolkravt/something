@@ -28,6 +28,7 @@ class QuestionType extends AbstractType
             ->add('answers',CollectionType::class,[
                 'entry_type' => AnswerType::class,
                 'entry_options' => ['label' => false],
+                'required' => false
             ])
         ;
 

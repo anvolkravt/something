@@ -37,11 +37,6 @@ class QuestionController extends AbstractController
         $answer3->setIsCorrect(false);
         $answer4->setIsCorrect(false);
 
-        $answer1->setQuestion($question);
-        $answer2->setQuestion($question);
-        $answer3->setQuestion($question);
-        $answer4->setQuestion($question);
-
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
@@ -49,10 +44,6 @@ class QuestionController extends AbstractController
             $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
-            $entityManager->persist($answer1);
-            $entityManager->persist($answer2);
-            $entityManager->persist($answer3);
-            $entityManager->persist($answer4);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_main');
@@ -65,18 +56,14 @@ class QuestionController extends AbstractController
     }
 
     /**
-     * @Route("/admin/show_questions", name="show_questions")
+     * @Route("/admin/question_list", name="question_list")
+     * @return Response
      */
-    public function showQuestions()
+    public function showQuestions(): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
         $questions = $this->getDoctrine()
             ->getRepository(Question::class)
             ->findAll();
-//        $question = $this->getDoctrine()
-//            ->getRepository(Question::class)
-//            ->find(1);
-//        $answers = $question->getAnswers();
 
         return $this->render('question/questionList.html.twig', [
             'controller_name' => 'QuestionController',

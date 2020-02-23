@@ -34,12 +34,12 @@ class Quiz
     private $isActive;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Question", inversedBy="quizzes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Question", inversedBy="quizzes",cascade={"persist"})
      */
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz")
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz", orphanRemoval=true)
      */
     private $results;
 

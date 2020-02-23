@@ -26,12 +26,12 @@ class Question
     private $text;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="question", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="question", orphanRemoval=true, cascade={"persist"})
      */
     private $answers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Quiz", mappedBy="questions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Quiz", mappedBy="questions", cascade={"persist"})
      */
     private $quizzes;
 

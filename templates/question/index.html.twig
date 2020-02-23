@@ -18,7 +18,7 @@
         {% for answer in addQuestionForm.answers %}
             {% if loop.first %}
             <div class="form-group input-block">
-                {{ form_label(answer.text, 'Correct', {'label_attr': {'class': 'correct-answer-label'}}) }}{{ form_widget(answer.text, {'attr': {'class': 'input-field'}}) }}
+                {{ form_label(answer.text, 'Correct', {'label_attr': {'class': 'correct-answer-label'}}) }}{{ form_widget(answer.text, {'attr': {'class': 'input-field', 'required': true}}) }}
             </div>
             {% else %}
             <div class="form-group input-block">
