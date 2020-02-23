@@ -3,15 +3,15 @@
 {% block title %}Questions{% endblock %}
 
 {% block body %}
-{#    {%  for question in questions %}#}
-{#        {{ question.text }}#}
+    {%  for question in questions %}
+        {{ question.text }}
 {#        {% for i in question.answers|length %}#}
 {#            {{ question.answers[i] }}#}
 {#        {% endfor %}#}
-{#    {% endfor %}#}
-
-    {{ question.text }}
-    {% for answer in answers %}
-        {{ answer.text }}
     {% endfor %}
+
+{#    {{ question.text }}#}
+{#    {% for answer in answers %}#}
+{#        {{ answer.text }}#}
+{#    {% endfor %}#}
 {% endblock %}

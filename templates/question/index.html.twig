@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/adminSection.css') }}">
+{% endblock %}
+
 {% block title %}Create Question{% endblock %}
 
 {% block body %}
+    <h1 class="page-title">Create question</h1>
     {{ form_start(addQuestionForm, {'action': path('add_question'), 'method': 'POST',
         'attr':{'class': 'form'}}) }}
-    {{ form_row(addQuestionForm.text) }}
-
+    <div class="form-group input-block">
+        {{ form_label(addQuestionForm.text, 'Question') }}{{ form_widget(addQuestionForm.text, {'attr': {'class': 'input-field'}}) }}
+    </div>
+    <h4 class="header">Answers</h4>
         {% for answer in addQuestionForm.answers %}
-{#            <li>{{ form_row(answer.isCorrect) }}{{ form_row(answer.text) }}</li>#}
-            <li>{{ form_row(answer.text) }}</li>
+            {% if loop.first %}
+            <div class="form-group input-block">
+                {{ form_label(answer.text, 'Correct', {'label_attr': {'class': 'correct-answer-label'}}) }}{{ form_widget(answer.text, {'attr': {'class': 'input-field'}}) }}
+            </div>
+            {% else %}
+            <div class="form-group input-block">
+                {{ form_label(answer.text, 'Wrong', {'label_attr': {'class': 'wrong-answer-label'}}) }}{{ form_widget(answer.text, {'attr': {'class': 'input-field'}}) }}
+            </div>
+            {% endif %}
         {% endfor %}
 
     <button class="btn" type="submit">Add Question</button>
     {{ form_end(addQuestionForm) }}
-
-{#    {{ form(addQuestionForm) }}#}
 
 {% endblock %}

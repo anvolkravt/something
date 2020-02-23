@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Question;
-use App\Form\QuestionCreationType;
+use App\Form\QuestionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,11 +42,10 @@ class QuestionController extends AbstractController
         $answer3->setQuestion($question);
         $answer4->setQuestion($question);
 
-        $form = $this->createForm(QuestionCreationType::class, $question);
+        $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // ... maybe do some form processing, like saving the Task and Tag objects
             $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
@@ -55,6 +54,8 @@ class QuestionController extends AbstractController
             $entityManager->persist($answer3);
             $entityManager->persist($answer4);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin_main');
         }
 
         return $this->render('question/index.html.twig', [
@@ -68,19 +69,18 @@ class QuestionController extends AbstractController
      */
     public function showQuestions()
     {
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $questions = $this->getDoctrine()
-//            ->getRepository(Question::class)
-//            ->findAll();
-        $question = $this->getDoctrine()
+        $entityManager = $this->getDoctrine()->getManager();
+        $questions = $this->getDoctrine()
             ->getRepository(Question::class)
-            ->find(1);
-        $answers = $question->getAnswers();
+            ->findAll();
+//        $question = $this->getDoctrine()
+//            ->getRepository(Question::class)
+//            ->find(1);
+//        $answers = $question->getAnswers();
 
         return $this->render('question/questionList.html.twig', [
             'controller_name' => 'QuestionController',
-            'question' => $question,
-            'answers' => $answers
+            'questions' => $questions
         ]);
     }
 }

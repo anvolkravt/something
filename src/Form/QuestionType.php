@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuestionCreationType extends AbstractType
+class QuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,6 @@ class QuestionCreationType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Question',
                     'attr' => ['autofocus' => true]
                 ]
             )
