@@ -99,3 +99,18 @@ label {
 .quiz-questions-label {
     text-align: center;
 }
+
+
+
+
+
+
+
+
+.back-to-main-admin {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}

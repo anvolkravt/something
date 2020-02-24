@@ -1,0 +1,25 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Questions{% endblock %}
+
+{% block body %}
+    <h1 class="page-title">Question List</h1>
+
+    {% include 'admin/_admin-main-button.html.twig' %}
+
+    <ul class="quiz-list">
+        {%  for quizz in quizzes %}
+            <li class="quiz-item">
+                {{ quizz.name }}
+                <ul>
+                    {% for i in range (0, 100) %}
+                        {% if questions[loop.parent.loop.index - 1][i] is defined %}
+                            <li>{{ questions[loop.parent.loop.index - 1][i].text }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

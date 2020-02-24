@@ -43,4 +43,27 @@ class QuizController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/list/quizzes", name="quiz_list")
+     * @return Response
+     */
+    public function showQuizzes(): Response
+    {
+        $quizzes = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->findAll();
+        $questions = array_map(
+            function(Quiz $question)
+            {
+                return $question->getQuestions();
+            },
+            $quizzes);
+
+        return $this->render('quiz/quizList.html.twig', [
+            'controller_name' => 'QuestionController',
+            'quizzes' => $quizzes,
+            'questions' => $questions
+        ]);
+    }
 }
