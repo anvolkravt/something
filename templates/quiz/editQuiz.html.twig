@@ -1,0 +1,21 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Create quiz{% endblock %}
+
+{% block body %}
+    <h1 class="page-title">Edit quiz</h1>
+
+    {{ form_start(form, {'method': 'POST',
+        'attr':{'class': 'form quiz-form'}}) }}
+    <div class="form-group input-block">
+        {{ form_label(form.name, 'Quiz name') }}{{ form_widget(form.name, {'attr': {'class': 'input-field'}}) }}
+    </div>
+    {{ form_row(form.isActive) }}
+    {{ form_label(form.questions, 'Questions', {'label_attr': {'class': 'quiz-questions-label'}}) }}
+    {{ form_widget(form.questions) }}
+    {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+
+    {% include 'admin/_admin-main-button.html.twig' %}
+
+{% endblock %}

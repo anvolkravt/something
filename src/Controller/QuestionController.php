@@ -75,24 +75,35 @@ class QuestionController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/admin/edit/question/{id}", name="edit_question")
-//     * @param int $id, requirements={"id" = "\d+"}
-//     * @return Response
-//     */
-//    public function editQuestion(int $id): Response
-//    {
-//        $question = $this->getDoctrine()
-//            ->getRepository(Question::class)
-//            ->find($id);
-//
-//
-//        return $this->render('question/questionList.html.twig', [
-//            'controller_name' => 'QuestionController',
-//            'question' => $questions,
-//            'answers' => $answers
-//        ]);
-//    }
+    /**
+     * @Route("/admin/edit/question/{id}", name="edit_question")
+     * @param int $id , requirements={"id" = "\d+"}
+     * @param $request
+     * @return Response
+     */
+    public function editQuestion(int $id, Request $request): Response
+    {
+        $question = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->find($id);
+
+        $form = $this->createForm(QuestionType::class, $question);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $question = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('question_list');
+        }
+
+        return $this->render('question/editQuestion.html.twig', [
+            'controller_name' => 'QuestionController',
+            'form' => $form->createView()
+        ]);
+    }
 
     /**
      * @Route("/admin/delete/question/{id}", name="delete_question")

@@ -17,7 +17,7 @@ class MainController extends AbstractController
     {
         $quizzes = $this->getDoctrine()
             ->getRepository(Quiz::class)
-            ->findAll();
+            ->findBy(['isActive' => 1]);
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',

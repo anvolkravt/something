@@ -21,9 +21,7 @@ class QuestionType extends AbstractType
                     'required' => true,
                     'attr' => ['autofocus' => true]
                 ])
-            ->add('submit', SubmitType::class, [
-                    'label' => 'Create'
-                ]);
+            ->add('submit', SubmitType::class);
         $builder
             ->add('answers',CollectionType::class, [
                 'entry_type' => AnswerType::class,

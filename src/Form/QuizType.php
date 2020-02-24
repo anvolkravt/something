@@ -24,7 +24,8 @@ class QuizType extends AbstractType
                 'attr' => ['autofocus' => true]
             ])
             ->add('isActive', CheckboxType::class, [
-                'label' => 'Should this quiz be active after creation?'
+                'label' => 'Should this quiz be active after creation?',
+                'required' => false
             ])
             ->add('questions', EntityType::class, [
                 'class' => Question::class,

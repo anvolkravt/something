@@ -1,16 +1,16 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Create Question{% endblock %}
+{% block title %}Edit Question{% endblock %}
 
 {% block body %}
-    <h1 class="page-title">Create question</h1>
-    {{ form_start(addQuestionForm, {'action': path('create_question'), 'method': 'POST',
+    <h1 class="page-title">Edit question</h1>
+    {{ form_start(form, { 'method': 'POST',
         'attr':{'class': 'form'}}) }}
     <div class="form-group input-block">
-        {{ form_label(addQuestionForm.text, 'Question') }}{{ form_widget(addQuestionForm.text, {'attr': {'class': 'input-field'}}) }}
+        {{ form_label(form.text, 'Question') }}{{ form_widget(form.text, {'attr': {'class': 'input-field'}}) }}
     </div>
     <h4 class="header">Answers</h4>
-        {% for answer in addQuestionForm.answers %}
+        {% for answer in form.answers %}
             {% if loop.first %}
             <div class="form-group input-block">
                 {{ form_label(answer.text, 'Correct', {'label_attr': {'class': 'correct-answer-label'}}) }}{{ form_widget(answer.text, {'attr': {'class': 'input-field', 'required': true}}) }}
@@ -22,8 +22,8 @@
             {% endif %}
         {% endfor %}
 
-        {{ form_label(form.submit, 'Create') }}{{ form_widget(form.submit) }}
-    {{ form_end(addQuestionForm) }}
+        {{ form_row(form.submit)}}
+    {{ form_end(form) }}
 
     {% include 'admin/_admin-main-button.html.twig' %}
 

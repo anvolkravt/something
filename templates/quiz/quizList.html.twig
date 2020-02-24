@@ -11,6 +11,9 @@
         {%  for quiz in quizzes %}
             <li class="quiz-item">
                 {{ quiz.name }}
+                <small style="color:{{ quiz.isActive == 1 ? 'green' : "red" }}">
+                    {{ quiz.isActive == 1 ? 'is active' : "isn't active" }}
+                </small>
                 <ul>
                     {% for i in range (0, 100) %}
                         {% if questions[loop.parent.loop.index - 1][i] is defined %}
@@ -19,6 +22,7 @@
                     {% endfor %}
                 </ul>
                 <a href="{{ path('delete_quiz', {'id': quiz.id}) }}">Delete</a>
+                <a href="{{ path('edit_quiz', {'id': quiz.id}) }}">Edit</a>
             </li>
         {% endfor %}
     </ul>

@@ -68,6 +68,36 @@ class QuizController extends AbstractController
     }
 
     /**
+     * @Route("/admin/edit/quiz/{id}", name="edit_quiz")
+     * @param int $id , requirements={"id" = "\d+"}
+     * @param $request
+     * @return Response
+     */
+    public function editQuiz(int $id, Request $request): Response
+    {
+        $quiz = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->find($id);
+
+        $form = $this->createForm(QuizType::class, $quiz);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $quiz = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($quiz);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('quiz_list');
+        }
+
+        return $this->render('quiz/editQuiz.html.twig', [
+            'controller_name' => 'QuestionController',
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("/admin/delete/quiz/{id}", name="delete_quiz")
      * @param int $id, requirements={"id" = "\d+"}
      * @return Response
