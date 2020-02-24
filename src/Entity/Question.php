@@ -101,7 +101,7 @@ class Question
     {
         if (!$this->quizzes->contains($quiz)) {
             $this->quizzes[] = $quiz;
-            $quiz->setQuestions($this);
+            $quiz->addQuestion($this);
         }
 
         return $this;
@@ -113,7 +113,7 @@ class Question
             $this->quizzes->removeElement($quiz);
             // set the owning side to null (unless already changed)
             if ($quiz->getQuestions() === $this) {
-                $quiz->setQuestions(null);
+                $quiz->addQuestion(null);
             }
         }
 

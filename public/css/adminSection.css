@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.admin-panel > a {
+.admin-button {
     color: inherit;
     padding: 10px;
     border: 2px solid #524e7b;
@@ -20,7 +20,7 @@
 /*   CREATE QUESTION   */
 
 .form {
-    width: 60%;
+    width: 65%;
     min-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -33,7 +33,7 @@
 }
 
 .input-field {
-    width: 90%;
+    width: 80%;
     margin-left: 30px;
 }
 
@@ -78,4 +78,24 @@ label {
     border-radius: 5px;
     margin-top: 30px;
     width: 70%;
+}
+
+/*   CREATE QUIZ   */
+
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-form > .input-block {
+    width: 100%;
+}
+
+.quiz-form .input-field {
+    margin-left: 15px;
+}
+
+.quiz-questions-label {
+    text-align: center;
 }

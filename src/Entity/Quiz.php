@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,12 @@ class Quiz
      * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz", orphanRemoval=true)
      */
     private $results;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+        $this->results = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -84,19 +92,41 @@ class Quiz
         return $this;
     }
 
-    public function getQuestions(): ?Question
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }
 
-    public function setQuestions(?Question $questions): self
+    public function addQuestion(Question $question): self
     {
-        $this->questions = $questions;
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->addQuiz($this);
+        }
 
         return $this;
     }
 
-    public function getResults(): ?Result
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            // set the owning side to null (unless already changed)
+            if ($question->getQuizzes() === $this) {
+                $question->addQuiz(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Result[]
+     */
+    public function getResults(): Collection
     {
         return $this->results;
     }

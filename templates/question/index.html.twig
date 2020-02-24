@@ -1,15 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/adminSection.css') }}">
-{% endblock %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Create Question{% endblock %}
 
 {% block body %}
     <h1 class="page-title">Create question</h1>
-    {{ form_start(addQuestionForm, {'action': path('add_question'), 'method': 'POST',
+    {{ form_start(addQuestionForm, {'action': path('create_question'), 'method': 'POST',
         'attr':{'class': 'form'}}) }}
     <div class="form-group input-block">
         {{ form_label(addQuestionForm.text, 'Question') }}{{ form_widget(addQuestionForm.text, {'attr': {'class': 'input-field'}}) }}
@@ -27,7 +22,7 @@
             {% endif %}
         {% endfor %}
 
-    <button class="btn" type="submit">Add Question</button>
+        {{ form_widget(addQuestionForm.submit) }}
     {{ form_end(addQuestionForm) }}
 
 {% endblock %}

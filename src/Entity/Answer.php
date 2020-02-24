@@ -29,10 +29,15 @@ class Answer
     private $isCorrect;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="answers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="answers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $question;
+
+    public function __construct()
+    {
+        $this->isCorrect = false;
+    }
 
     public function getId(): ?int
     {

@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuestionController extends AbstractController
 {
     /**
-     * @Route("/admin/add_question", name="add_question")
+     * @Route("/admin/create/question", name="create_question")
      * @param Request $request
      * @return Response
      */
@@ -33,9 +33,6 @@ class QuestionController extends AbstractController
         $question->addAnswer($answer4);
 
         $answer1->setIsCorrect(true);
-        $answer2->setIsCorrect(false);
-        $answer3->setIsCorrect(false);
-        $answer4->setIsCorrect(false);
 
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
@@ -56,7 +53,7 @@ class QuestionController extends AbstractController
     }
 
     /**
-     * @Route("/admin/question_list", name="question_list")
+     * @Route("/admin/list/questions", name="question_list")
      * @return Response
      */
     public function showQuestions(): Response
@@ -64,10 +61,17 @@ class QuestionController extends AbstractController
         $questions = $this->getDoctrine()
             ->getRepository(Question::class)
             ->findAll();
+        $answers = array_map(
+            function(Question $question)
+            {
+                return $question->getAnswers();
+            },
+            $questions);
 
         return $this->render('question/questionList.html.twig', [
             'controller_name' => 'QuestionController',
-            'questions' => $questions
+            'questions' => $questions,
+            'answers' => $answers
         ]);
     }
 }

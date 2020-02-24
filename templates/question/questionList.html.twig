@@ -1,24 +1,23 @@
-{% extends 'base.html.twig' %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/adminSection.css') }}">
-{% endblock %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Questions{% endblock %}
 
 {% block body %}
     <h1 class="page-title">Question List</h1>
+
+    {% include 'admin/_admin-menu.html.twig' %}
+
     <ul class="question-list">
         {%  for question in questions %}
             <li class="question-item">
                 {{ question.text }}
+                <ul>
+                    {% for i in range (0, 3) %}
+                        <li style="color: {{ loop.index == 1 ? 'green' : 'red' }}">{{ answers[loop.parent.loop.index -1][i].text }}</li>
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
     </ul>
 
-{#    {{ question.text }}#}
-{#    {% for answer in answers %}#}
-{#        {{ answer.text }}#}
-{#    {% endfor %}#}
 {% endblock %}

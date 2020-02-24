@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuizController extends AbstractController
 {
     /**
-     * @Route("/admin/create_quiz", name="add_quiz")
+     * @Route("/admin/create/quiz", name="create_quiz")
      * @param $request
      * @return Response
      * @throws Exception
@@ -30,15 +30,12 @@ class QuizController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $quiz->setCreationDate(new DateTime());
-            $entityManager = $this->getDoctrine()->getManager();
-            $questionArray = $form->get('questions')->getData()->toArray();
-            for($i = 0; $i < count($questionArray); $i++) {
-                $entityManager->persist($questionArray[$i]);
-            }
-
             $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quiz);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin_main');
         }
 
         return $this->render('quiz/index.html.twig', [

@@ -1,7 +1,7 @@
 body {
-    background: linear-gradient(#f6f5ff, #3f396b);
     color: #383554;
-    min-height: 100vh;
+    height: 100vh;
+    background: linear-gradient(#f6f5ff, #3f396b) fixed;
 }
 
 .btn {
@@ -9,6 +9,13 @@ body {
     background: rgba(255, 255, 255, 0.5);
     margin-top: 30px;
     font-weight: bold;
+    color: inherit;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #524e7b;
+    border-color: #524e7b;
 }
 
 .page-title {

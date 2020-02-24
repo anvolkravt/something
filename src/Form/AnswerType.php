@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Answer;
@@ -25,13 +27,6 @@ class AnswerType extends AbstractType
                     'required' => true
                 ]
             )
-//            ->add('isCorrect', RadioType::class, [
-//                'label' => false,
-//                'attr' => [
-//                    'name' => 'answer',
-//                    'checked' => false
-//                ]
-//            ])
         ;
     }
 

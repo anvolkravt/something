@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Question;
 use App\Entity\Quiz;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,9 +19,13 @@ class QuizType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('isActive')
-//            ->add('questions')
+            ->add('name', TextType::class, [
+                'required' => true,
+                'attr' => ['autofocus' => true]
+            ])
+            ->add('isActive', CheckboxType::class, [
+                'label' => 'Should this quiz be active after creation?'
+            ])
             ->add('questions', EntityType::class, [
                 'class' => Question::class,
                 'choice_name' => 'id',
@@ -26,15 +34,10 @@ class QuizType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Create'
+            ])
         ;
-//        $builder
-//            ->add('questions',CollectionType::class,[
-//                'label' => false,
-//                'entry_type' => QuestionType::class,
-//                'entry_options' => ['label' => false]
-//            ])
-//        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
