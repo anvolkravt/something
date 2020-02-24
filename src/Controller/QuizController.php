@@ -66,4 +66,22 @@ class QuizController extends AbstractController
             'questions' => $questions
         ]);
     }
+
+    /**
+     * @Route("/admin/delete/quiz/{id}", name="delete_quiz")
+     * @param int $id, requirements={"id" = "\d+"}
+     * @return Response
+     */
+    public function deleteQuiz(int $id): Response
+    {
+        $quiz = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($quiz);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('quiz_list');
+    }
 }

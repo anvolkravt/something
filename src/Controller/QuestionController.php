@@ -74,4 +74,41 @@ class QuestionController extends AbstractController
             'answers' => $answers
         ]);
     }
+
+//    /**
+//     * @Route("/admin/edit/question/{id}", name="edit_question")
+//     * @param int $id, requirements={"id" = "\d+"}
+//     * @return Response
+//     */
+//    public function editQuestion(int $id): Response
+//    {
+//        $question = $this->getDoctrine()
+//            ->getRepository(Question::class)
+//            ->find($id);
+//
+//
+//        return $this->render('question/questionList.html.twig', [
+//            'controller_name' => 'QuestionController',
+//            'question' => $questions,
+//            'answers' => $answers
+//        ]);
+//    }
+
+    /**
+     * @Route("/admin/delete/question/{id}", name="delete_question")
+     * @param int $id, requirements={"id" = "\d+"}
+     * @return Response
+     */
+    public function deleteQuestion(int $id): Response
+    {
+        $question = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($question);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('question_list');
+    }
 }

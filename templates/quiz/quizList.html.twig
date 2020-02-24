@@ -8,9 +8,9 @@
     {% include 'admin/_admin-main-button.html.twig' %}
 
     <ul class="quiz-list">
-        {%  for quizz in quizzes %}
+        {%  for quiz in quizzes %}
             <li class="quiz-item">
-                {{ quizz.name }}
+                {{ quiz.name }}
                 <ul>
                     {% for i in range (0, 100) %}
                         {% if questions[loop.parent.loop.index - 1][i] is defined %}
@@ -18,6 +18,7 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
+                <a href="{{ path('delete_quiz', {'id': quiz.id}) }}">Delete</a>
             </li>
         {% endfor %}
     </ul>

@@ -16,6 +16,7 @@
                         <li style="color: {{ loop.index == 1 ? 'green' : 'red' }}">{{ answers[loop.parent.loop.index -1][i].text }}</li>
                     {% endfor %}
                 </ul>
+                <a href="{{ path('delete_question', {'id': question.id}) }}">Delete</a>
             </li>
         {% endfor %}
     </ul>

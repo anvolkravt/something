@@ -9,12 +9,18 @@
 }
 
 .admin-button {
+    min-width: fit-content;
+    width: 220px;
     color: inherit;
     padding: 10px;
     border: 2px solid #524e7b;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     margin-bottom: 30px;
+}
+
+.admin-button.logout {
+    margin-top: 100px;
 }
 
 /*   CREATE QUESTION   */
@@ -61,9 +67,9 @@ label {
     margin-top: 40px;
 }
 
-/*   QUESTION LIST   */
+/*   QUESTION AND QUIZ LISTS   */
 
-.question-list {
+.question-list, .quiz-list {
     width: 100%;
     list-style: none;
     display: flex;
@@ -71,7 +77,7 @@ label {
     align-items: center;
 }
 
-.question-item {
+.question-item, .quiz-item {
     padding: 10px;
     border: 2px solid #524e7b;
     background: rgba(255, 255, 255, 0.5);
